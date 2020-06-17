@@ -2,10 +2,4 @@
 
 TBD
 
-Call http://overpass-turbo.eu/ with
-```
-node
-  [highway=speed_camera]
-  ({{bbox}});
-out;
-```
+[SpeedCamera](https://dominikherold.github.io/SpeedCamera/)

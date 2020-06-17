@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
+using System.Text;
 using System.Xml.Serialization;
 using Converter.Model;
 using Newtonsoft.Json;
@@ -14,10 +16,13 @@ namespace Converter
             Console.WriteLine("Start");
 
             var jsonAreas = new List<Area>();
+            var client = new HttpClient { Timeout = TimeSpan.FromMinutes(2) };
+            var toSend = "data=node%0A++%5Bhighway%3Dspeed_camera%5D%0A++(44.29240108529005%2C3.44970703125%2C57.100452089370705%2C17.4462890625)%3B%0Aout%3B";
+            var responseMessage = client.PostAsync("http://overpass-api.de/api/interpreter", new StringContent(toSend, Encoding.UTF8, "application/x-www-form-urlencoded")).GetAwaiter().GetResult();
 
-            using (var stream = new FileStream(@"C:\Projects\SpeedCamera\OverpassTurboRaw.xml", FileMode.Open))
+            using (var content = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult())
             {
-                var osmData = (osm)new XmlSerializer(typeof(osm)).Deserialize(stream);
+                var osmData = (osm)new XmlSerializer(typeof(osm)).Deserialize(content);
 
                 foreach (var node in osmData.node)
                 {
@@ -31,7 +36,8 @@ namespace Converter
                 }
             }
 
-            var result = JsonConvert.SerializeObject(jsonAreas.ToArray());
+            var result = JsonConvert.SerializeObject(jsonAreas.ToArray(), Formatting.Indented);
+            File.WriteAllText(@"C:\Projects\SpeedCamera\docs\areas.json", result);
 
             Console.WriteLine("End");
             Console.ReadKey();
