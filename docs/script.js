@@ -38,17 +38,28 @@ options = {
 var noSleep = new NoSleep();
 var toggleEl = document.querySelector("#toggle");
 toggleEl.addEventListener('click', function() {
+  noSleep = new NoSleep();
   noSleep.enable(); // keep the screen on!    
   toggleEl.style.visibility = "hidden";
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      areas = JSON.parse(this.responseText);
-      document.body.style.backgroundColor = "greenyellow";
-    }
-  };
-  xhttp.open('GET', 'areas.json', true);
-  xhttp.send();
+  if (areas == null){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        areas = JSON.parse(this.responseText);
+        document.body.style.backgroundColor = "greenyellow";
+      }
+    };
+    xhttp.open('GET', 'areas.json', true);
+    xhttp.send();
+  }
+  
   id = navigator.geolocation.watchPosition(success, error, options);
 }, false);
+
+window.onblur = function(){
+  document.body.style.backgroundColor = "yellow";
+  toggleEl.style.visibility = "visible";
+  noSleep.disable();
+  navigator.geolocation.clearWatch(id);
+}
 
