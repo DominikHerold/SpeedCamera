@@ -1,16 +1,11 @@
 var id, options;
-var changed = 0;
 var areas;
 
 function success(pos) {
   var crd = pos.coords;
 
-  var element = document.getElementById('coord');
-    element.innerHTML = crd.latitude + ' ' + crd.longitude;
-
-    var changedElement = document.getElementById('changed');
-    changed = changed + 1;
-    changedElement.innerHTML = changed;
+  var element = document.getElementById('velocity');
+    element.innerHTML = crd.speed * 3.6 + ' km/h';
 
     var color = "greenyellow";
     for (i = areas.length - 1; i >= 0; i--){
