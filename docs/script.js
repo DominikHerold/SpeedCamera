@@ -5,7 +5,7 @@ function success(pos) {
   var crd = pos.coords;
 
   var element = document.getElementById('velocity');
-    element.innerHTML = crd.speed * 3.6 + ' km/h';
+    element.innerHTML = parseInt(crd.speed * 3.6) + ' km/h';
 
     var color = "greenyellow";
     for (i = areas.length - 1; i >= 0; i--){
