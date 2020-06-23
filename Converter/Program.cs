@@ -35,8 +35,8 @@ out;");
                     var lat = node.lat;
                     var lon = node.lon;
 
-                    var nw = CalculateProjectWaypoint(lat, lon, 0.2, 315);
-                    var se = CalculateProjectWaypoint(lat, lon, 0.2, 135);
+                    var nw = CalculateProjectWaypoint(lat, lon, 0.25, 315);
+                    var se = CalculateProjectWaypoint(lat, lon, 0.25, 135);
 
                     jsonAreas.Add(new Area { latN = nw.Item1, latS = se.Item1, longE = se.Item2, longW = nw.Item2 });
                 }
