@@ -66,12 +66,3 @@ window.onblur = function(){
   navigator.geolocation.clearWatch(id);
 }
 
-window.onfocus = function(){
-  if (areas != null){
-    toggleEl.style.visibility = "hidden";
-    noSleep = new NoSleep();
-    noSleep.enable(); // keep the screen on! 
-    id = navigator.geolocation.watchPosition(success, error, options);
-  }
-}
-
