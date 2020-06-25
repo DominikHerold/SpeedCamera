@@ -12,7 +12,10 @@ function success(pos) {
       item = areas[i];
       if (item['latN'] >= crd.latitude && item['longW'] <= crd.longitude && item['latS'] <= crd.latitude && item['longE'] >= crd.longitude){
         color = "red";
-        document.getElementById('alarm-sound').play();
+        if (document.body.style.backgroundColor != "red"){
+          document.getElementById('alarm-sound').play();
+        }
+        
         break;
       }
     }
