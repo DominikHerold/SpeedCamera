@@ -12,6 +12,7 @@ function success(pos) {
       item = areas[i];
       if (item['latN'] >= crd.latitude && item['longW'] <= crd.longitude && item['latS'] <= crd.latitude && item['longE'] >= crd.longitude){
         color = "red";
+        document.getElementById('alarm-sound').play();
         break;
       }
     }
@@ -33,6 +34,10 @@ options = {
 var noSleep = new NoSleep();
 var toggleEl = document.querySelector("#toggle");
 toggleEl.addEventListener('click', function() {
+  document.getElementById('alarm-sound').load();
+  if( document.getElementById('alarm-sound') ){
+    document.getElementById('alarm-sound').pause();
+  }
   noSleep = new NoSleep();
   noSleep.enable(); // keep the screen on!    
   toggleEl.style.visibility = "hidden";
