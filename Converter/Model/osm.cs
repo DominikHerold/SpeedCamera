@@ -34,9 +34,10 @@ namespace Converter.Model
 
         private double lonField;
 
-        private osmNodeTag tagField;
+        private osmNodeTag[] tagField;
 
-        public osmNodeTag tag
+        [System.Xml.Serialization.XmlElementAttribute("tag")]
+        public osmNodeTag[] tag
         {
             get
             {
