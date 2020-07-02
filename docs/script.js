@@ -8,10 +8,15 @@ function success(pos) {
     element.innerHTML = Math.round(crd.speed * 3.6) + ' km/h';
 
     var color = "greenyellow";
+    var maxSpeed = "";
     for (i = areas.length - 1; i >= 0; i--){
       item = areas[i];
       if (item['latN'] >= crd.latitude && item['longW'] <= crd.longitude && item['latS'] <= crd.latitude && item['longE'] >= crd.longitude){
         color = "red";
+        if (item['MaxSpeed'] != null){
+          maxSpeed = item['MaxSpeed'];
+        }
+
         if (document.body.style.backgroundColor != "red"){
           document.getElementById('alarm-sound').play();
         }
@@ -21,6 +26,7 @@ function success(pos) {
     }
 
     document.body.style.backgroundColor = color;
+    document.getElementById('maxspeed').innerHTML = maxSpeed;
 }
 
 function error(err) {
