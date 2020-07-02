@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Web;
@@ -34,15 +35,28 @@ out;");
                 {
                     var lat = node.lat;
                     var lon = node.lon;
+                    var maxSpeed = node.tag.FirstOrDefault(tag => tag.k.Equals("maxspeed", StringComparison.OrdinalIgnoreCase))?.v;
+                    if (!string.IsNullOrEmpty(maxSpeed) && maxSpeed.Any(character => !char.IsDigit(character)))
+                    {
+                        maxSpeed = null;
+                    }
 
                     var nw = CalculateProjectWaypoint(lat, lon, 0.25, 315);
                     var se = CalculateProjectWaypoint(lat, lon, 0.25, 135);
 
-                    jsonAreas.Add(new Area { latN = nw.Item1, latS = se.Item1, longE = se.Item2, longW = nw.Item2 });
+                    jsonAreas.Add(
+                        new Area
+                        {
+                            latN = nw.Item1,
+                            latS = se.Item1,
+                            longE = se.Item2,
+                            longW = nw.Item2,
+                            MaxSpeed = maxSpeed
+                        });
                 }
             }
 
-            var result = JsonConvert.SerializeObject(jsonAreas.ToArray(), Formatting.Indented);
+            var result = JsonConvert.SerializeObject(jsonAreas.ToArray(), Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             File.WriteAllText(@"C:\Projects\SpeedCamera\docs\areas.json", result);
 
             Console.WriteLine("End");
