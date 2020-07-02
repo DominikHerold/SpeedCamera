@@ -34,6 +34,20 @@ namespace Converter.Model
 
         private double lonField;
 
+        private osmNodeTag tagField;
+
+        public osmNodeTag tag
+        {
+            get
+            {
+                return this.tagField;
+            }
+            set
+            {
+                this.tagField = value;
+            }
+        }
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public double lat
@@ -63,5 +77,40 @@ namespace Converter.Model
         }
     }
 
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class osmNodeTag
+    {
 
+        private string kField;
+
+        private string vField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string k
+        {
+            get
+            {
+                return this.kField;
+            }
+            set
+            {
+                this.kField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string v
+        {
+            get
+            {
+                return this.vField;
+            }
+            set
+            {
+                this.vField = value;
+            }
+        }
+    }
 }
