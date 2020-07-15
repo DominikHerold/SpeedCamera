@@ -34,6 +34,21 @@ function error(err) {
   alert(err.message);
 }
 
+function showPosition(position){}
+
+function showError(error){
+  if (error.code == error.PERMISSION_DENIED){
+    alert('📍 ZUGRIFF AUF STANDORT ERLAUBEN 📍');
+  }
+}
+
+if (!navigator.geolocation){
+  alert('📍 ZUGRIFF AUF STANDORT ERLAUBEN 📍');
+}
+else{
+  navigator.geolocation.getCurrentPosition(showPosition, showError);
+}
+
 options = {
   enableHighAccuracy: true,
   timeout: 5000,
