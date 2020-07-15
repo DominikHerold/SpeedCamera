@@ -31,7 +31,7 @@ function success(pos) {
 
 function error(err) {
   console.warn('ERROR(' + err.code + '): ' + err.message);
-  alert(err.message);
+  alert('📍 ZUGRIFF AUF STANDORT ERLAUBEN 📍');
 }
 
 function showPosition(position){}
