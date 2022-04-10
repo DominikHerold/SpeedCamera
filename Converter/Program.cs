@@ -18,14 +18,14 @@ namespace Converter
             Console.WriteLine("Start");
 
             var jsonAreas = new List<Area>();
-            var client = new HttpClient { Timeout = TimeSpan.FromMinutes(2) };
+            var client = new HttpClient { Timeout = TimeSpan.FromMinutes(5) };
             var data = HttpUtility.UrlEncode(
                 @"node
   [highway=speed_camera]
   (44.29240108529005,3.44970703125,57.100452089370705,17.4462890625);
 out;");
             var toSend = $"data={data}";
-            var responseMessage = client.PostAsync("http://overpass-api.de/api/interpreter", new StringContent(toSend, Encoding.UTF8, "application/x-www-form-urlencoded")).GetAwaiter().GetResult();
+            var responseMessage = client.PostAsync("https://overpass-api.de/api/interpreter", new StringContent(toSend, Encoding.UTF8, "application/x-www-form-urlencoded")).GetAwaiter().GetResult();
 
             using (var content = responseMessage.Content.ReadAsStreamAsync().GetAwaiter().GetResult())
             {
