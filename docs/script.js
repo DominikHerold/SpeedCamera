@@ -81,7 +81,7 @@ toggleEl.addEventListener('click', function() {
 }, false);
 
 window.onblur = function(){
-  document.body.style.backgroundColor = "yellow";
+  document.body.style.backgroundColor = "orange";
   toggleEl.style.visibility = "visible";
   noSleep.disable();
   navigator.geolocation.clearWatch(id);
