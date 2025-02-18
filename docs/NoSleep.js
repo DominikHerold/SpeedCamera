@@ -119,7 +119,7 @@ var oldIOS = function oldIOS() {
 
 // Detect native Wake Lock API support
 var nativeWakeLock = function nativeWakeLock() {
-  return "wakeLock" in navigator;
+  return false;
 };
 
 var NoSleep = function () {
