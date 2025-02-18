@@ -62,7 +62,6 @@ toggleEl.addEventListener('click', function() {
   if( document.getElementById('alarm-sound') ){
     document.getElementById('alarm-sound').pause();
   }
-  noSleep = new NoSleep();
   noSleep.enable(); // keep the screen on!    
   toggleEl.style.visibility = "hidden";
   if (areas == null){
