@@ -19,6 +19,7 @@ namespace Converter
 
             var jsonAreas = new List<Area>();
             var client = new HttpClient { Timeout = TimeSpan.FromMinutes(5) };
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("Thunder Client (https://www.thunderclient.com)");
             var data = HttpUtility.UrlEncode(
                 @"node
   [highway=speed_camera]
